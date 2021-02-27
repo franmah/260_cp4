@@ -1,0 +1,11 @@
+TODO: add libraries needed (ajax, bootstarp)
+
+1. If needed: update the port used by ther server
+
+2. Update the url of the server in vue.config.js
+
+3. Update the database used (back-end/index.js line 13)
+
+Commands:
+back-end: node index.js
+front-end: npm run serve

@@ -40,6 +40,7 @@ const courseSchema = new mongoose.Schema({
   name: String,
   description: String,
   credits: Number,
+  professors: Array,
 });
 
 const commentSchema = new mongoose.Schema({
@@ -63,6 +64,7 @@ app.get('/api/universities', async (req, res) => {
   }
 });
 
+// Create university
 app.post('/api/university', async (req, res) => {
   try {
     if (!req.body.name || !req.body.description || !req.body.id || !req.body.logo || !req.body.color)
@@ -84,10 +86,11 @@ app.post('/api/university', async (req, res) => {
     res.status(200).send(university);
   } catch (err) {
     console.log(`err: ` + err);
-    res.status(400).send({error: err});
+    res.status(400).send({ error: err });
   }
 });
 
+// Create course
 app.post('/api/course', async (req, res) => {
   try {
     if (!req.body.name || !req.body.id || !req.body.universityId || !req.body.title ||
@@ -112,8 +115,10 @@ app.post('/api/course', async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       credits: req.body.credits,
+      professors: req.body.professors,
     });
     await course.save();
+    res.status(200).send(course);
   } catch (error) {
     console.log(error);
   }
